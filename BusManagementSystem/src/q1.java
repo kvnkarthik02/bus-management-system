@@ -40,7 +40,7 @@ public class q1 {
         q1GraphSetup(stop_times_File, stops_File, transfers_File);
 
         int from_stop = 1111;
-        int to_stop = 1111;
+        int to_stop = 2222;
 
         if(from_stop == to_stop){
             System.out.println("From and To Locations are both the same stops!");
