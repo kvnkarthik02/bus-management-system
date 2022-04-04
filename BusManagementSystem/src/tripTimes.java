@@ -7,18 +7,18 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 public class tripTimes {
-public ArrayList<tripInfo> validInfo;
+public ArrayList<tripInfo> validInfo = new ArrayList<>();
 
     public tripTimes(File stop_timesFile) throws IOException {
         parseStop_TimesFile(stop_timesFile);
     }
 
     public void parseStop_TimesFile(File stop_timesFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("inputs\stop_times.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("inputs\\stop_times.txt"));
         try{
             String string;
             int count =0;
-            while((string = reader.readLine())!=null){
+            while((string = reader.readLine()) != null){
                 String[] line = string.split(",");
                 if(count!=0){
                     int trip_id = -1;
@@ -53,7 +53,7 @@ public ArrayList<tripInfo> validInfo;
                         drop_off_type = Integer.parseInt(line[7]);
                     }
                     if((line.length==9)&&(!line[8].equals(""))){
-                        shape_dist_traveled = Integer.parseInt(line[8]);
+                        shape_dist_traveled = Float.parseFloat(line[8]);
                     }
                     
                     if(checkValidity(arrival_time, departure_time)){
@@ -70,7 +70,6 @@ public ArrayList<tripInfo> validInfo;
     }
 
     public boolean checkValidity(String arrival_time, String departure_time){
-        boolean valid = false;
 
         String arrival_time_without_space = arrival_time.replaceAll("\\s", "");
         String departure_time_without_space = departure_time.replaceAll("\\s", "");
@@ -95,15 +94,14 @@ public ArrayList<tripInfo> validInfo;
             departureSeconds = Integer.parseInt(arrivalSeperate[2]);
             
         }catch (Exception e){
-            valid = false;
-            return valid;
+            return false;
         }
 
         if((arrivalHours<=23) && (departureHours<=23) && (arrivalMinutes<=59) && (departureMinutes<=59) && (arrivalSeconds<=59) && (departureSeconds<=59)){
-            valid = true;
+            return true;
+        }else{
+            return false;
         }
-
-        return valid;
     }
 
 

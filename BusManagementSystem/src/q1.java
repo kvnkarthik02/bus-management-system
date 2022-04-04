@@ -9,12 +9,14 @@ public class q1 {
     public static tripTimes tripTimes;
 
     public static void q1GraphSetup(File stop_timesFile, File stopsFile, File transfersFile) throws IOException {
+        System.out.println("--------------------------------------------------------------------");
         System.out.println("Graph Setup");
+        System.out.println("--------------------------------------------------------------------");
 
         stops = new Stops(stopsFile, transfersFile);
         tripTimes = new tripTimes(stop_timesFile);
 
-        for (int i = 0; i < tripTimes.validInfo.size(); i++) {
+        for (int i = 1; i < tripTimes.validInfo.size(); i++) {
             tripInfo trip = tripTimes.validInfo.get(i - 1);
             tripInfo trip2 = tripTimes.validInfo.get(i);
             stops.newStop(trip.stop_id, trip2.stop_id, 1);
@@ -24,6 +26,12 @@ public class q1 {
     }
 
     public static void main(String[] args) throws Exception {
+        ASCIIArtGenerator artGen = new ASCIIArtGenerator();
+        System.out.println();
+        artGen.printTextArt("Bus Management System", ASCIIArtGenerator.ART_SIZE_MEDIUM);
+        System.out.println();
+
+
         q1 q1 = new q1();
         File stop_times_File = new File("inputs\\stop_times.txt");
         File stops_File = new File("inputs\\stops.txt");
@@ -31,8 +39,13 @@ public class q1 {
 
         q1GraphSetup(stop_times_File, stops_File, transfers_File);
 
-        int from_stop = 2345;
-        int to_stop = 7542;
+        int from_stop = 1111;
+        int to_stop = 1111;
+
+        if(from_stop == to_stop){
+            System.out.println("From and To Locations are both the same stops!");
+            return;
+        }
 
         ArrayList<Integer> temp = stops.getJourneyPath(from_stop, to_stop);
         double cost = stops.pathCost;
