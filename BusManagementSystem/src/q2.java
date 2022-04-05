@@ -39,6 +39,9 @@ public class q2 {
         }
 
         String[] search = tst.search("HASTINGS");
+        System.out.println("----------------------------------------------");
+        System.out.println("Search Results:");
+        System.out.println("----------------------------------------------");
         for (String x : search)
             System.out.println(x);
         System.out.println("Length " + search.length);
