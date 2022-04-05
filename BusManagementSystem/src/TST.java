@@ -102,14 +102,14 @@ public class TST {
     public node searchPrefix(node root, char[] stopNames, int count){
 
         if(root == null){
-            root = new node(stopNames[count]);
+            return null;
         }
         if(stopNames[count] < root.c){
             return searchPrefix(root.left, stopNames, count);
         }else if(stopNames[count]> root.c){
             return searchPrefix(root.right, stopNames, count);
         }else{
-            if(count < stopNames.length - 1){
+            if(count == stopNames.length - 1){
                 return root;
             }
             else{
