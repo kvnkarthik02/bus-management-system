@@ -15,3 +15,5 @@ part3: Searching for all trips with a given arrival time, returning full details
 
 part4: Provide front interface enabling selection between the above features or an option to exit 
 the programme, and enabling required user input.
+
+<b>P.S: the part4 branch includes a the functionality of all parts 1, 2 and 3 as well as a Visual Interface.</b>
