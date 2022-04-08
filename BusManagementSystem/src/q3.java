@@ -2,45 +2,53 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
+
+import javax.xml.transform.SourceLocator;
 
 
 public class q3{
     public static int hourInput;
     public static int minInput;
     public static int secondsInput;
+    public static ArrayList<tripInfo> validInfo;
 
-    public boolean checkValidity(String arrival_time){
+    public static boolean checkValidity(String time){
 
-        String arrival_time_without_space = arrival_time.replaceAll("\\s", "");
+        String time_without_space = time.replaceAll("\\s", "");
 
-        String[] arrivalSeperate = arrival_time_without_space.split(":");
+        String[] timeSeperate = time_without_space.split(":");
 
-        int arrivalHours=0;
-        int arrivalMinutes=0;
-        int arrivalSeconds=0;
+        int Hours=0;
+        int Minutes=0;
+        int Seconds=0;
 
         try{
-            arrivalHours = Integer.parseInt(arrivalSeperate[0]);
-            arrivalMinutes = Integer.parseInt(arrivalSeperate[1]);
-            arrivalSeconds = Integer.parseInt(arrivalSeperate[2]);            
+            Hours = Integer.parseInt(timeSeperate[0]);
+            Minutes = Integer.parseInt(timeSeperate[1]);
+            Seconds = Integer.parseInt(timeSeperate[2]);            
         }catch (Exception e){
             return false;
         }
 
-        if((arrivalHours<=23) && (arrivalMinutes<=59) && (arrivalSeconds<=59)){
+        if((Hours<=23) && (Minutes<=59) && (Seconds<=59)){
             return true;
         }else{
             return false;
         }
     }
 
-    public static ArrayList<String> parseValidStops_TimesFile(File stops_timesFile)throws IOException{
+    public static ArrayList<tripInfo> parseValidStops_TimesFile(File stops_timesFile, String hourInput2, String minInput2, String secondsInput2)throws IOException{
+        ArrayList<tripInfo> validDetails = new ArrayList<tripInfo>();
+        BufferedReader reader = new BufferedReader(new FileReader("inputs\\stop_times.txt"));
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(stops_timesFile));
             String string;
             int count =0;
-            while((string = reader.readLine())!= null){
+            while((string = reader.readLine()) != null){
                 String[] line = string.split(",");
                 if(count!=0){
                     int trip_id = -1;
@@ -53,6 +61,8 @@ public class q3{
 
                     String arrival_time = line[1];
                     String departure_time = line[2];
+                    
+
 
                     if(!line[0].equals("")){
                         trip_id = Integer.parseInt(line[0]);
@@ -75,26 +85,72 @@ public class q3{
                     if((line.length==9)&&(!line[8].equals(""))){
                         shape_dist_traveled = Float.parseFloat(line[8]);
                     }
+                    
+                    if(checkValidity(arrival_time) &&  checkValidity(departure_time)){
+                        validDetails.add(new tripInfo(trip_id, arrival_time, departure_time, stop_id, stop_sequence, stop_headsign, pickup_type, drop_off_type, shape_dist_traveled));
+
+                    }
                 }
                 count++;
             }
-        }catch(Exception e){
+        }catch (Exception e){
             System.out.println(e);
         }
+        System.out.println("StopTimes File Reading Completed");
+        return validDetails;
+    }
+
+    public static String[][] sort(String[][] map){
+        boolean bool = true;
+        String[] temp;
+        while(!bool){
+            bool = true;
+            for(int i=0;i<map.length -1;i++){
+                int one = Integer.parseInt(map[i][0]);
+                int two = Integer.parseInt(map[i+1][0]);
+                if(one > two){
+                    temp = map[i];
+                    map[i] = map[i+1];
+                    map[i+1] = temp;
+                    bool = false;
+                }
+            }
+        }
+        return map;
+    }
+
+    public static ArrayList<tripInfo> searchArrayList(ArrayList<tripInfo> validInfo, String hourInput, String minInput, String secondsInput){
+        ArrayList<tripInfo> listWithCorrectTime = new ArrayList<tripInfo>();
+        for(int i=0;i<validInfo.size();i++){
+            tripInfo temp = validInfo.get(i);
+            String timeString = temp.arrival_time;
+            timeString = timeString.replaceAll(" ", "");
+            String[] timeStringArr = timeString.split(":");
+            if(timeStringArr[0].equals(hourInput) && timeStringArr[1].equals(minInput) && timeStringArr[2].equals(secondsInput)){
+                listWithCorrectTime.add(temp);
+                System.out.println("item added");
+            }
+        }        
+        return listWithCorrectTime;
     }
 
     public static void main(String[] args)throws IOException{
-        int hourInput = 15;
-        int minInput = 15;
-        int secondsInput = 15;
-        if((hourInput >=23 ) || (minInput >= 59) || (secondsInput >= 59)){
-            System.out.println("Invalid Input Times!" + "\n");
-            return;
-        }
+        String hourInput = "17";
+        String minInput = "18";
+        String secondsInput = "19";
+        String time = hourInput + ":" + minInput + ":" + secondsInput;
+        System.out.println(time);
 
-        File stops_timesFile = new File("inputs\\stops_times.txt");
-        parseValidStops_TimesFile(stops_timesFile);
+
+        File stops_timesFile = new File("inputs\\stop_times.txt");
+        validInfo = parseValidStops_TimesFile(stops_timesFile, hourInput, minInput, secondsInput);
+        System.out.println(validInfo.size());
+        validInfo = searchArrayList(validInfo, hourInput, minInput, secondsInput);
+        System.out.println(validInfo.size());
+        
     }
 
     
 }  
+
+
