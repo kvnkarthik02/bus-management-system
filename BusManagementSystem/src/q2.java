@@ -21,7 +21,7 @@ public class q2 {
 
     public static void main(String[] args) throws IOException {
 
-        File stopsFile = new File("inputs\\stops.txt");
+        File stopsFile = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops.txt");
         BufferedReader reader = new BufferedReader(new FileReader(stopsFile));
         String string;
 
