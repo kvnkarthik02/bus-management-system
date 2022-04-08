@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -128,10 +130,25 @@ public class q3{
             String[] timeStringArr = timeString.split(":");
             if(timeStringArr[0].equals(hourInput) && timeStringArr[1].equals(minInput) && timeStringArr[2].equals(secondsInput)){
                 listWithCorrectTime.add(temp);
-                System.out.println("item added");
             }
         }        
         return listWithCorrectTime;
+    }
+
+    public static ArrayList<tripInfo> sort(ArrayList<tripInfo> validInfo){
+        boolean bool = false;
+        while(!bool){
+            bool = true;
+            for(int i=0;i<validInfo.size()-1;i++){
+                int stopID1 = validInfo.get(i).stop_id;
+                int stopID2 = validInfo.get(i+1).stop_id;
+                if(stopID1>stopID2){
+                    Collections.swap(validInfo, i, i+1);
+                    bool = false;
+                }
+            }
+        }
+        return validInfo;
     }
 
     public static void main(String[] args)throws IOException{
@@ -144,10 +161,20 @@ public class q3{
 
         File stops_timesFile = new File("inputs\\stop_times.txt");
         validInfo = parseValidStops_TimesFile(stops_timesFile, hourInput, minInput, secondsInput);
-        System.out.println(validInfo.size());
         validInfo = searchArrayList(validInfo, hourInput, minInput, secondsInput);
-        System.out.println(validInfo.size());
-        
+        ArrayList<tripInfo> sortedResults = sort(validInfo);
+
+        System.out.println("Search results are as follows: " + "\n");
+        // System.out.println(sortedResults.size());
+
+        for(int i=0;i<sortedResults.size();i++){
+            System.out.println("--------------------------------------------");
+            System.out.println(i+1);
+            System.out.println("StopID: "+sortedResults.get(i).stop_id);
+            System.out.println("Arrival Time: "+ sortedResults.get(i).arrival_time);
+            System.out.println("--------------------------------------------");            
+        }
+
     }
 
     
