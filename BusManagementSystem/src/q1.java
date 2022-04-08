@@ -33,9 +33,9 @@ public class q1 {
 
 
         q1 q1 = new q1();
-        File stop_times_File = new File("inputs\\stop_times.txt");
-        File stops_File = new File("inputs\\stops.txt");
-        File transfers_File = new File("inputs\\transfers.txt");
+        File stop_times_File = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stop_times.txt");
+        File stops_File = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops.txt");
+        File transfers_File = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/transfers.txt");
 
         q1GraphSetup(stop_times_File, stops_File, transfers_File);
 
