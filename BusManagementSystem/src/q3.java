@@ -46,7 +46,7 @@ public class q3{
 
     public static ArrayList<tripInfo> parseValidStops_TimesFile(File stops_timesFile, String hourInput2, String minInput2, String secondsInput2)throws IOException{
         ArrayList<tripInfo> validDetails = new ArrayList<tripInfo>();
-        BufferedReader reader = new BufferedReader(new FileReader("inputs\\stop_times.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(stops_timesFile));
         try{
             String string;
             int count =0;
@@ -158,7 +158,7 @@ public class q3{
         System.out.println("Your Input Time: "+time);
 
 
-        File stops_timesFile = new File("inputs\\stop_times.txt");
+        File stops_timesFile = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stop_times.txt");
         validInfo = parseValidStops_TimesFile(stops_timesFile, hourInput, minInput, secondsInput);
         validInfo = searchArrayList(validInfo, hourInput, minInput, secondsInput);
         ArrayList<tripInfo> sortedResults = sort(validInfo);
