@@ -14,12 +14,11 @@ public class q1 {
         this.from_stop = from_stop;
         this.to_stop = to_stop;
 
-        File stop_times_File = new File("inputs\\stop_times.txt");
-        File stops_File = new File("inputs\\stops.txt");
-        File transfers_File = new File("inputs\\transfers.txt");
+        File stop_times_File = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops_times.txt");
+        File stops_File = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops.txt");
+        File transfers_File = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/transfers.txt");
 
         q1GraphSetup(stop_times_File, stops_File, transfers_File);
-
         if(from_stop == to_stop){
             System.out.println("From and To Locations are both the same stops!");
             return;

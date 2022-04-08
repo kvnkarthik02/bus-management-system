@@ -14,10 +14,37 @@ import javax.xml.transform.SourceLocator;
 
 
 public class q3{
-    public static int hourInput;
-    public static int minInput;
-    public static int secondsInput;
+    public static  String hourInput;
+    public static  String minInput;
+    public static  String secondsInput;
     public static ArrayList<tripInfo> validInfo;
+
+    public q3(String hourInput, String minInput, String secondsInput) throws IOException{
+        this.hourInput = hourInput;
+        this.minInput = minInput;
+        this.secondsInput = secondsInput;
+
+        String time = hourInput + ":" + minInput + ":" + secondsInput;
+        System.out.println("Your Input Time: "+time);
+
+
+        File stops_timesFile = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops_times.txt");
+        validInfo = parseValidStops_TimesFile(stops_timesFile, hourInput, minInput, secondsInput);
+        validInfo = searchArrayList(validInfo, hourInput, minInput, secondsInput);
+        ArrayList<tripInfo> sortedResults = sort(validInfo);
+
+        System.out.println("Search results are as follows: " + "\n");
+        // System.out.println(sortedResults.size());
+
+        for(int i=0;i<sortedResults.size();i++){
+            System.out.println("--------------------------------------------");
+            System.out.println(i+1);
+            System.out.println("StopID: "+sortedResults.get(i).stop_id);
+            System.out.println("Arrival Time: "+ sortedResults.get(i).arrival_time);
+        }
+        System.out.println("--------------------------------------------");
+        
+    }
 
     public static boolean checkValidity(String time){
 
@@ -46,7 +73,7 @@ public class q3{
 
     public static ArrayList<tripInfo> parseValidStops_TimesFile(File stops_timesFile, String hourInput2, String minInput2, String secondsInput2)throws IOException{
         ArrayList<tripInfo> validDetails = new ArrayList<tripInfo>();
-        BufferedReader reader = new BufferedReader(new FileReader("inputs\\stop_times.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stop_times.txt"));
         try{
             String string;
             int count =0;
@@ -149,33 +176,6 @@ public class q3{
         }
         return validInfo;
     }
-
-    public static void main(String[] args)throws IOException{
-        String hourInput = "17";
-        String minInput = "18";
-        String secondsInput = "19";
-        String time = hourInput + ":" + minInput + ":" + secondsInput;
-        System.out.println("Your Input Time: "+time);
-
-
-        File stops_timesFile = new File("inputs\\stop_times.txt");
-        validInfo = parseValidStops_TimesFile(stops_timesFile, hourInput, minInput, secondsInput);
-        validInfo = searchArrayList(validInfo, hourInput, minInput, secondsInput);
-        ArrayList<tripInfo> sortedResults = sort(validInfo);
-
-        System.out.println("Search results are as follows: " + "\n");
-        // System.out.println(sortedResults.size());
-
-        for(int i=0;i<sortedResults.size();i++){
-            System.out.println("--------------------------------------------");
-            System.out.println(i+1);
-            System.out.println("StopID: "+sortedResults.get(i).stop_id);
-            System.out.println("Arrival Time: "+ sortedResults.get(i).arrival_time);
-        }
-        System.out.println("--------------------------------------------");
-
-    }
-
     
 }  
 

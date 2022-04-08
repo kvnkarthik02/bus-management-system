@@ -7,21 +7,10 @@ import java.util.ArrayList;
 public class q2 {
     public static ArrayList<String> stopNames = new ArrayList<String>();
     public static TST tst = new TST();
+    public static String stopSearch;
 
-    public static String manipulateStopName(String stop_name) {
-        String flag = stop_name.substring(0, 2).strip();
-        if (flag.equals("WB") || flag.equals("NB") || flag.equals("SB") || flag.equals("EB")) {
-            String temp = stop_name.substring(3);
-            String temp2 = stop_name.substring(0, 2);
-            String manipStopName = temp.concat(" ").concat(temp2);
-            return manipulateStopName(manipStopName);
-        }
-        return stop_name;
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        File stopsFile = new File("inputs\\stops.txt");
+    public static void q2init(String stopSearch) throws IOException{
+        File stopsFile = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops.txt");
         BufferedReader reader = new BufferedReader(new FileReader(stopsFile));
         String string;
 
@@ -38,7 +27,7 @@ public class q2 {
             tst.insert(stopName);
         }
 
-        String[] search = tst.search("HASTINGS");
+        String[] search = tst.search(stopSearch);
         System.out.println("----------------------------------------------");
         System.out.println("Search Results:");
         System.out.println("----------------------------------------------");
@@ -47,4 +36,16 @@ public class q2 {
         System.out.println("Length " + search.length);
 
     }
+
+    public static String manipulateStopName(String stop_name) {
+        String flag = stop_name.substring(0, 2).strip();
+        if (flag.equals("WB") || flag.equals("NB") || flag.equals("SB") || flag.equals("EB")) {
+            String temp = stop_name.substring(3);
+            String temp2 = stop_name.substring(0, 2);
+            String manipStopName = temp.concat(" ").concat(temp2);
+            return manipulateStopName(manipStopName);
+        }
+        return stop_name;
+    }
+
 }

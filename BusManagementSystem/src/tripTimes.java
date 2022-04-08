@@ -14,7 +14,7 @@ public ArrayList<tripInfo> validInfo = new ArrayList<>();
     }
 
     public void parseStop_TimesFile(File stop_timesFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("inputs\\stop_times.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stop_times.txt"));
         try{
             String string;
             int count =0;

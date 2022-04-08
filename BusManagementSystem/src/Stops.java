@@ -31,7 +31,7 @@ public class Stops {
     }
 
     public void parseStopsFile(File stopsFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(stopsFile));
+        BufferedReader reader = new BufferedReader(new FileReader("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops.txt"));
         int count = 0;
         String string;
         try {
@@ -69,7 +69,7 @@ public class Stops {
     }
 
     public void parseTransfersFile(File transfersFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("inputs\\transfers.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/transfers.txt"));
         int count = 0;
         String string;
         try {
