@@ -59,7 +59,6 @@ public class q4{
                     String secInput = scan.nextLine();
                     q3 q3 = new q3(hourInput, minInput, secInput);
 
-
                     break;
                 case 4: 
                     System.out.println("Thank you for using our services.");
