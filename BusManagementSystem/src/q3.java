@@ -98,7 +98,6 @@ public class q3{
         }catch (Exception e){
             System.out.println(e);
         }
-        System.out.println("StopTimes File Reading Completed");
         return validDetails;
     }
 
@@ -156,7 +155,7 @@ public class q3{
         String minInput = "18";
         String secondsInput = "19";
         String time = hourInput + ":" + minInput + ":" + secondsInput;
-        System.out.println(time);
+        System.out.println("Your Input Time: "+time);
 
 
         File stops_timesFile = new File("inputs\\stop_times.txt");
@@ -172,8 +171,8 @@ public class q3{
             System.out.println(i+1);
             System.out.println("StopID: "+sortedResults.get(i).stop_id);
             System.out.println("Arrival Time: "+ sortedResults.get(i).arrival_time);
-            System.out.println("--------------------------------------------");            
         }
+        System.out.println("--------------------------------------------");
 
     }
 
