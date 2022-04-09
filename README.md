@@ -6,7 +6,7 @@ Repo  link: https://github.com/kvnkarthik02/bus-management-system
 Each part of this assignment has been committed to this repository under different branches.
 Part1, Part2, Part3 and Part 4 are in their own branches. 
 
-----------------------------------------------------------------------------------------------------
+
 part1: Finding shortest paths between 2 bus stops (as input by the user), returning the list of stops 
 en route as well as the associated “cost”.
 ----------------------------------------------------------------------------------------------------
