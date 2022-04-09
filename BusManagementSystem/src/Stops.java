@@ -64,7 +64,6 @@ public class Stops {
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println("StopsFile Completed");
         reader.close();
     }
 
@@ -97,7 +96,6 @@ public class Stops {
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println("TransfersFile Reading Completed");
         reader.close();
     }
 

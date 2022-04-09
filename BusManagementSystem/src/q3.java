@@ -27,11 +27,22 @@ public class q3{
         String time = hourInput + ":" + minInput + ":" + secondsInput;
         System.out.println("Your Input Time: "+time);
 
+        if(!checkValidity(time)){
+            System.out.println("Invalid input time!");
+            return;
+        }
 
         File stops_timesFile = new File("C:/Users/kvnka/Documents/GitHub/BusManagementSystem/BusManagementSystem/inputs/stops_times.txt");
         validInfo = parseValidStops_TimesFile(stops_timesFile, hourInput, minInput, secondsInput);
         validInfo = searchArrayList(validInfo, hourInput, minInput, secondsInput);
         ArrayList<tripInfo> sortedResults = sort(validInfo);
+
+        if(sortedResults.size()==0){
+            System.out.println("--------------------------------------------");
+            System.out.println("No buses at this time!");
+            System.out.println("--------------------------------------------");
+            return;
+        }
 
         System.out.println("Search results are as follows: " + "\n");
         // System.out.println(sortedResults.size());
