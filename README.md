@@ -1,5 +1,7 @@
 # bus-management-system
-Repo for CSU22012 Algorithms and Data Structures 2 Final Assignment.
+Repo  link: https://github.com/kvnkarthik02/bus-management-system
+
+
 
 Each part of this assignment has been committed to this repository under different branches.
 Part1, Part2, Part3 and Part 4 are in their own branches. 
